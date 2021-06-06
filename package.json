@@ -9,6 +9,7 @@
     "eject": "expo eject"
   },
   "dependencies": {
+    "@expo/metro-config": "^0.1.72",
     "@react-native-community/datetimepicker": "^3.5.2",
     "@react-native-community/masked-view": "^0.1.11",
     "@react-native-picker/picker": "^1.16.1",
@@ -38,7 +39,7 @@
     "react-native-gesture-handler": "^1.10.3",
     "react-native-numeric-input": "^1.9.0",
     "react-native-paper": "^4.9.1",
-    "react-native-reanimated": "^2.1.0",
+    "react-native-reanimated": "~1.13.0",
     "react-native-safe-area-context": "^3.2.0",
     "react-native-screens": "^2.18.1",
     "react-native-vector-icons": "^8.1.0",

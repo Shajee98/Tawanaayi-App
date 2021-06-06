@@ -16,6 +16,8 @@ export default function SignIn(props) {
             {
               props.navigation.replace('Home')
             }
+             setEmail("");
+             setPassword("");
         });
          return unsubscribe;
       },[]);
@@ -48,7 +50,7 @@ export default function SignIn(props) {
                 borderColor: 'gray',
                 borderWidth: 1,
                 placeholderTextColor: 'gray', backgroundColor: '#DDDDDD', borderRadius: 10, padding: 4, width: 300
-            }} placeholder="Insert your password!" onChangeText={(text) => setPassword(text)}/>
+            }} placeholder="Insert your password!" secureTextEntry onChangeText={(text) => setPassword(text)}/>
             </View>
             {/* </View> */}
             <View style={{ paddingTop: 40 }}>
@@ -61,15 +63,8 @@ export default function SignIn(props) {
             <View style={{ flex: 1, flexDirection: 'column', alignItems: 'center', paddingTop: 10 }}>
                 <TouchableOpacity style={{ flex: 0, flexDirection: 'row', alignItems: 'center', marginTop: -20 }}
                     onPress={() => {
-                        props.navigation.navigate('SignUp'),
-                            console.log(email),
-                            console.log(password)
+                        props.navigation.navigate('SignUp')
                     }}
-                //   onPress={() =>
-                //     this.props.navigation.navigate('Covid', {
-                //       userName: this.state.nu,
-                //       otherParam: '101'
-                //     })}
                 ><Text style={{ fontWeight: 400, color: '#FFFFFF' }}>Don't have an account? Click here</Text>
                 </TouchableOpacity>
             </View>

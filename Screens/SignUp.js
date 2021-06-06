@@ -10,7 +10,7 @@ import { useEffect } from 'react';
 
 export default function SignUp({navigation,route}) {
 
-    const {Name,Email,Password,Gender,DOB} = useContext(UserContext);
+    const {Name,Email,Password,DOB} = useContext(UserContext);
 
     const [name, setName] = Name;
     const [email, setEmail] = Email;
@@ -18,21 +18,12 @@ export default function SignUp({navigation,route}) {
     const [gender, setGender] = useState('Male')
     const [age, setAge] = useState(0);
     const [date, setDate] = DOB
-    const [mode, setMode] = useState('date');
-    const [show, setShow] = useState(false);
-
-    // var database = firebase.database();
-    // let user = firebase.auth().currentUser.email;
-    // let uid = user.uid;
 
     useEffect(() => {
         const getAge = () => {
            const year = new Date();
-        // const currYear = year.getTime();
-        // const birth_date = date.getTime();
-        //    setAge(new Number((currYear-birth_date)/31536000000).toFixed(0))
-        const currYear = year.getFullYear();
-        setAge(currYear - parseInt(date.substring(0,4),10))
+           const currYear = year.getFullYear();
+           setAge(currYear - parseInt(date.substring(0,4),10))
         }
         getAge();
     },[date,age])
@@ -46,36 +37,7 @@ export default function SignUp({navigation,route}) {
                 Age: age
             }
         )
-        // await db.collection('users').doc(email.toString()).collection("user").add(
-        //     {
-        //         Name: name,
-        //         Gender: gender,
-        //         Age: age
-        //     }
-        // )
     }
-
-    const onChange = (event, selectedDate) => {
-        setShow(Platform.OS === 'ios');
-        if (mode == 'date') {
-            const currentDate = selectedDate || new Date();
-            setDate(currentDate);
-            setShow(Platform.OS !== 'ios'); // to show time
-        }
-    };
-
-    const showMode = (currentMode) => {
-        setShow(true);
-        setMode(currentMode);
-      };
-    
-      const showDatepicker = () => {
-        showMode('date');
-      };
-    
-      const showTimepicker = () => {
-        showMode('time');
-      };
     const checkTextInput = () => {
         if (name === '') {
             alert('Please Enter Name');
@@ -101,7 +63,11 @@ export default function SignUp({navigation,route}) {
         //Do whatever you want
         else {
             register();
-            sendUserDetails();
+            setName("");
+            setEmail("");
+            setPassword("");
+            setGender("");
+            setDate("");
         }
     };
     const register = () => {
@@ -109,7 +75,7 @@ export default function SignUp({navigation,route}) {
         .then(authUser => {
             authUser.user.updateProfile({
                 displayName: name,
-            }).then(navigation.navigate('SignIn'))
+            }).then(sendUserDetails())
         }).catch((error) => alert(error.message))
       }
     return (
@@ -162,19 +128,6 @@ export default function SignUp({navigation,route}) {
                 <Text style={{ marginTop: 10, color: '#FFFFFF', fontSize: 20, paddingTop: 5 }}>
                     Date of Birth
                 </Text>
-                {/* <View>
-                    <Button onPress={showDatepicker} title="Show date picker!" />
-                </View>
-                {show && (
-                    <DateTimePicker
-                    testID="dateTimePicker"
-                    value={date}
-                    mode={mode}
-                    is24Hour={true}
-                    display="default"
-                    onChange={onChange}
-                    />
-                )} */}
                 <TextInput style={{
                     height: 40,
                     borderColor: 'gray',
@@ -193,7 +146,7 @@ export default function SignUp({navigation,route}) {
             <View style={{ flex: 1, flexDirection: 'column', alignItems: 'center', paddingTop: 10 }}>
                 <TouchableOpacity style={{ flex: 0, flexDirection: 'row', alignItems: 'center', marginTop: -20 }}
                     onPress={() => {
-                        navigation.navigate('SignIn'),console.log(age)
+                        navigation.navigate('SignIn')
                     }}
                 ><Text style={{ fontWeight: 400, color: '#FFFFFF' }}>Already have an account? Click here</Text>
                 </TouchableOpacity>

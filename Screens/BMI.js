@@ -14,6 +14,7 @@ import { firebase,db } from '../firebase'
     const [mass, setMass] = Mass;
     const [bmi, setBMI] = BMI;
     const [visible, setVisible] = useState(false);
+    const [disable, setDisable] = useState(true);
 
     var database = firebase.database();
     let user = firebase.auth().currentUser.displayName
@@ -22,6 +23,17 @@ import { firebase,db } from '../firebase'
         setMeters(heightfeet+heightinches)
         setBMI(mass/(heightM*2));
         setVisible(false);
+        // const disableButton = () => {
+        //     if (heightfeet === null || heightinches === null || mass === null)
+        //     {
+        //        setDisable(true);
+        //     }
+        //     else 
+        //     {
+        //         setDisable(false);
+        //     }
+        // }
+        // return disableButton;
     },[heightfeet,heightinches,mass])
 
     const showAndsend = () => {
@@ -37,6 +49,18 @@ import { firebase,db } from '../firebase'
     }
              ).catch((error) => alert(error));
     }
+
+    // const disableButton = () => {
+    //     if (heightfeet == null && heightinches == null && mass == null)
+    //     {
+    //        setDisable(true);
+    //     }
+    //     else 
+    //     {
+    //         setDisable(false);
+    //         showAndsend();
+    //     }
+    // }
 
     return (
         <ScrollView contentContainerStyle={[styles.backgroundRest]}>
@@ -82,7 +106,10 @@ import { firebase,db } from '../firebase'
                     </View>
                     <View style={{ paddingTop: 40 }}>
                         <TouchableOpacity 
-                            onPress={showAndsend}
+                        // disabled={disable}
+                            onPress={
+                                // disable == false && 
+                                showAndsend}
                             style={styles.inYellow}
                         ><Text style={{ fontWeight: 'bold' }}>Calculate</Text>
                         </TouchableOpacity>
