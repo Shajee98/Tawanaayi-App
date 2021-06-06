@@ -50,18 +50,6 @@ import { firebase,db } from '../firebase'
              ).catch((error) => alert(error));
     }
 
-    // const disableButton = () => {
-    //     if (heightfeet == null && heightinches == null && mass == null)
-    //     {
-    //        setDisable(true);
-    //     }
-    //     else 
-    //     {
-    //         setDisable(false);
-    //         showAndsend();
-    //     }
-    // }
-
     return (
         <ScrollView contentContainerStyle={[styles.backgroundRest]}>
             <View style={{ width: '70%', alignSelf: 'center' }}>

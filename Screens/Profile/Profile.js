@@ -10,7 +10,7 @@ const Item = ({ title, id, date }) => (
       <Text style={{ paddingLeft: 5, paddingRight: 2, paddingBottom: 5, paddingTop: 5, color: '#FFFFFF', alignSelf: 'center' }}>{date}</Text>
     </View>
     <View style={{ borderColor: '#FFFFFF', alignItems: 'center', width: '50%' }}>
-      <Text style={{ paddingLeft: 2, paddingRight: 5, paddingBottom: 5, paddingTop: 5, color: 'green', alignSelf: 'center' }}>{title}</Text>
+      <Text style={{ paddingLeft: 2, paddingRight: 5, paddingBottom: 5, paddingTop: 5, color: '#FFCB1F', alignSelf: 'center' }}>{title}</Text>
     </View>
   </View>
 );
@@ -22,8 +22,6 @@ export default function Profile() {
   const [age, setAge] = useState(0);
   const [bmi,setBMI] = useState([]);
   const [bmr,setBMR] = useState([]);
-  const [bmiTimestamps, setBmiTimestamps] = useState([])
-  const [bmrTimestamps, setBmrTimestamps] = useState([])
 
     useEffect(() => {
        setGenderandAge();
@@ -54,23 +52,15 @@ export default function Profile() {
         })}
 
         const getBMILogs = async () => {
-              //  const tempBMR = []
+
           await database.ref('users/BMI').on('value', function(snapshot) {
                snapshot.forEach(function(childSnapshot) {
                    if (childSnapshot.key === user)
                    {
-                    //  tempBMR.push(
-                    //    {
-                    //      id: childSnapshot.key,
-                    //      item: childSnapshot.val()
-                    //    }
-                    //  )
-                    // console.log(childSnapshot.val())
-                      Object.keys(childSnapshot.val()).forEach(function(item) {
-                        bmi.push(childSnapshot.val()[item])
-                          // bmi.push(childSnapshot.val()[item]['BMI'])
-                          bmiTimestamps.push(childSnapshot.val()[item]['timestamp'])
-                        
+
+                    Object.keys(childSnapshot.val()).slice(0,3).forEach(function(item) {
+
+                        bmi.push(childSnapshot.val()[item])                        
                       })
                    }
                })
@@ -82,10 +72,10 @@ export default function Profile() {
                      snapshot.forEach(function(childSnapshot) {
                          if (childSnapshot.key === user)
                          {
-                            Object.keys(childSnapshot.val()).forEach(function(item) {
+                            Object.keys(childSnapshot.val()).slice(0,3).forEach(function(item) {
+
                               bmr.push(childSnapshot.val()[item])
-                           
-                              
+                                 
                             })
                          }
                      }) 
