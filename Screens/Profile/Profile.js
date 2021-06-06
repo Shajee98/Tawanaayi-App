@@ -1,8 +1,6 @@
 import React from 'react'
-import { useLayoutEffect } from 'react';
 import { useContext,useEffect,useState } from 'react';
 import { View, Text, ScrollView, Image, FlatList } from 'react-native'
-import styles from '../../assets/styles'
 import {firebase, db} from '../../firebase'
 import {UserContext} from './../../context'
 
@@ -37,8 +35,8 @@ export default function Profile() {
   console.log(gender);
   console.log(bmi);
   console.log(bmr);
-  console.log(bmiTimestamps);
-  console.log(bmrTimestamps);
+  // console.log(bmiTimestamps);
+  // console.log(bmrTimestamps);
 
   const setGenderandAge = async () => {
     await database.ref('users/details').on('value', function(snapshot) {
@@ -56,19 +54,26 @@ export default function Profile() {
         })}
 
         const getBMILogs = async () => {
-
+              //  const tempBMR = []
           await database.ref('users/BMI').on('value', function(snapshot) {
                snapshot.forEach(function(childSnapshot) {
                    if (childSnapshot.key === user)
                    {
+                    //  tempBMR.push(
+                    //    {
+                    //      id: childSnapshot.key,
+                    //      item: childSnapshot.val()
+                    //    }
+                    //  )
+                    // console.log(childSnapshot.val())
                       Object.keys(childSnapshot.val()).forEach(function(item) {
-
-                          bmi.push(childSnapshot.val()[item]['BMI'])
+                        bmi.push(childSnapshot.val()[item])
+                          // bmi.push(childSnapshot.val()[item]['BMI'])
                           bmiTimestamps.push(childSnapshot.val()[item]['timestamp'])
                         
                       })
                    }
-               }) 
+               })
               })}
 
               const getBMRLogs = async () => {
@@ -78,9 +83,8 @@ export default function Profile() {
                          if (childSnapshot.key === user)
                          {
                             Object.keys(childSnapshot.val()).forEach(function(item) {
-
-                              bmr.push(childSnapshot.val()[item]['BMR'])
-                                bmrTimestamps.push(childSnapshot.val()[item]['timestamp'])
+                              bmr.push(childSnapshot.val()[item])
+                           
                               
                             })
                          }
@@ -89,34 +93,14 @@ export default function Profile() {
 
     var database = firebase.database();
     let user = firebase.auth().currentUser.displayName;
-  // const DATA = [
-  //   {
-  //     id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
-  //     title: 'First Item',
-  //     date: '2021-02-20'
-  //   },
-  //   {
-  //     id: '3ac68afc-c605-48d3-a4f8-fbd91aa97f63',
-  //     title: 'Second Item',
-  //     date: '2021-02-20'
-  //   },
-  //   {
-  //     id: '58694a0f-3da1-471f-bd96-145571e29d72',
-  //     title: 'Third Item',
-  //     date: '2021-02-20'
-  //   },
-  // ];
 
-  const renderItem = ({ item }) => (
-    <Item title={item.title} id={item.id} date={item.date} />
+  const renderBMIItems = ({ item }) => (
+    <Item title={item.BMI}  date={item.timestamp} />
   );
-
-  // const renderItem =(group) => {
-  //   const listItems = group.map((member) => {
-  //     return <Text>{member}</Text>
-  //   })
-  //   return listItems;
-  // }
+  const renderBMRItems = ({ item }) => (
+    <Item title={item.BMR}  date={item.timestamp} />
+  );
+ 
   const renderSeparatorView = () => {
     return (
       <View style={{
@@ -154,9 +138,7 @@ export default function Profile() {
            </Text>
           <FlatList
             data={bmi}
-            renderItem={renderItem}
-              // ({item}) => (<Text style={{width: "200px"}}>{item}</Text>)
-            
+            renderItem={renderBMIItems}            
             keyExtractor={item => item.id}
             ItemSeparatorComponent={renderSeparatorView}
 
@@ -170,8 +152,7 @@ export default function Profile() {
            </Text>
           <FlatList
             data={bmr}
-            renderItem={renderItem}
-              // ({item}) => (<Text style={{width: "200px"}}>{item}</Text>)
+            renderItem={renderBMRItems}
             keyExtractor={item => item.id}
             ItemSeparatorComponent={renderSeparatorView}
 
