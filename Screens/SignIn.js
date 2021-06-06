@@ -8,14 +8,14 @@ import {UserContext} from './../context'
 
 export default function SignIn(props) {
 
-    const STORAGE_KEY = '@save_age' 
+    // const STORAGE_KEY = '@save_age' 
    
     const {Name,Email,Password} = useContext(UserContext);
     const [email, setEmail] = Email;
     const [password, setPassword] = Password;
 
     useEffect(() => {
-        readData();
+        // readData();
         const unsubscribe = firebase.auth().onAuthStateChanged((authUser) => {
             if (authUser)
             {
@@ -31,26 +31,26 @@ export default function SignIn(props) {
              firebase.auth().signInWithEmailAndPassword(email, password).catch((error) => alert(error));
           };
 
-          const saveData = async () => {
-            try {
-              await AsyncStorage.setItem(STORAGE_KEY, age)
-              alert('Data successfully saved')
-            } catch (e) {
-              alert('Failed to save the data to the storage')
-            }
-          }
+        //   const saveData = async () => {
+        //     try {
+        //       await AsyncStorage.setItem(STORAGE_KEY, age)
+        //       alert('Data successfully saved')
+        //     } catch (e) {
+        //       alert('Failed to save the data to the storage')
+        //     }
+        //   }
 
-          const readData = async () => {
-            try {
-              const userAge = await AsyncStorage.getItem(STORAGE_KEY)
+        //   const readData = async () => {
+        //     try {
+        //       const userAge = await AsyncStorage.getItem(STORAGE_KEY)
           
-              if (userAge !== null) {
-                setAge(userAge)
-              }
-            } catch (e) {
-              alert('Failed to fetch the data from storage')
-            }
-          }
+        //       if (userAge !== null) {
+        //         setAge(userAge)
+        //       }
+        //     } catch (e) {
+        //       alert('Failed to fetch the data from storage')
+        //     }
+        //   }
 
     return (
         <ScrollView contentContainerStyle={[styles.backgroundRest]}>

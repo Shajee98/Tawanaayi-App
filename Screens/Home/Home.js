@@ -40,9 +40,10 @@ export default function Home({navigation}) {
               } style={styles.inBlue}
               color='green'
             ><Text>BMR</Text>
-            </TouchableOpacity></View>
-            <TouchableOpacity style={styles1.inRed} onPress={signOut}><Text style={{color: 'red'}}>Logout</Text></TouchableOpacity>   
-            <TouchableOpacity style={styles1.inRed} onPress={() => navigation.navigate("Profile")}><Text style={{color: 'green', borderColor: "white"}}>Profile</Text></TouchableOpacity>
+            </TouchableOpacity>
+            </View>
+            <TouchableOpacity style={styles1.inPurple} onPress={signOut}><Text style={{color: 'white'}}>Logout</Text></TouchableOpacity>   
+            <TouchableOpacity style={styles1.inPink} onPress={() => navigation.navigate("Profile")}><Text style={{color: 'white'}}>Profile</Text></TouchableOpacity>
             </View>            
         </ScrollView>
     )
@@ -72,18 +73,30 @@ const styles1 = StyleSheet.create({
     padding: 10,
     marginBottom: 45
   },
-  inRed: {
+  inPurple: {
     flex: 0,
-        borderRadius: 360,
-        alignItems: "center",
-        fontFamily: "Open Sans",
-        fontSize: 16,
-        padding: 10,
-        width: 50,
-        height: 50,
-        marginBottom: 45,
-        flex: 1, flexDirection: 'column', alignSelf: 'center', paddingTop: 10,
-        fontFamily: 'Poppins'
+    backgroundColor: "#3F51B5",
+    borderRadius: 360,
+    alignItems: "center",
+    fontFamily: "Open Sans",
+    fontSize: 16,
+    padding: 10,
+    marginBottom: 45,
+    marginTop: 40,
+    width: "100px",
+    alignSelf: "center"
+  },
+  inPink: {
+    flex: 0,
+    backgroundColor: "#E72EC5",
+    borderRadius: 360,
+    alignItems: "center",
+    fontFamily: "Open Sans",
+    fontSize: 16,
+    padding: 10,
+    marginBottom: 45,
+    width: "100px",
+    alignSelf: "center"
   },
   inBlue: {
     flex: 0,

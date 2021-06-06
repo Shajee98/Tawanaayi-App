@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useLayoutEffect } from 'react'
 import { useContext,useEffect,useState } from 'react';
 import { View, Text, ScrollView, Image, FlatList } from 'react-native'
 import {firebase, db} from '../../firebase'
@@ -7,7 +7,7 @@ import {UserContext} from './../../context'
 const Item = ({ title, id, date }) => (
   <View style={{ flexDirection: 'row', alignItems: 'flex-start', flexWrap: 'wrap' }}>
     <View style={{ borderColor: '#FFFFFF', alignItems: 'center', width: '50%' }}>
-      <Text style={{ paddingLeft: 5, paddingRight: 2, paddingBottom: 5, paddingTop: 5, color: '#FFFFFF', alignSelf: 'center' }}>{date}</Text>
+      <Text style={{ paddingLeft: 5, paddingRight: 2, paddingBottom: 5, paddingTop: 5, color: '#FFFFFF', alignSelf: 'center' }}>{new Date(date).toUTCString()}</Text>
     </View>
     <View style={{ borderColor: '#FFFFFF', alignItems: 'center', width: '50%' }}>
       <Text style={{ paddingLeft: 2, paddingRight: 5, paddingBottom: 5, paddingTop: 5, color: '#FFCB1F', alignSelf: 'center' }}>{title}</Text>
@@ -23,14 +23,14 @@ export default function Profile() {
   const [bmi,setBMI] = useState([]);
   const [bmr,setBMR] = useState([]);
 
-    useEffect(() => {
+    useLayoutEffect(() => {
        setGenderandAge();
        getBMILogs();
        getBMRLogs();
   },[bmi,bmr])
 
-  console.log(age);
-  console.log(gender);
+  // console.log(age);
+  // console.log(gender);
   console.log(bmi);
   console.log(bmr);
 
