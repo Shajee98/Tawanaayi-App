@@ -33,8 +33,7 @@ export default function Profile() {
   console.log(gender);
   console.log(bmi);
   console.log(bmr);
-  // console.log(bmiTimestamps);
-  // console.log(bmrTimestamps);
+
 
   const setGenderandAge = async () => {
     await database.ref('users/details').on('value', function(snapshot) {

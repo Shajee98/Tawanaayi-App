@@ -18,7 +18,7 @@ import  Profile  from './Screens/Profile/Profile'
 import SplashScreen from './Screens/SplashScreen'
 import ForgotPassword from './Screens/ForgotPassword';
 import {UserDetails} from './context'
-import DrawerNavigator from './Screens/DrawerNavigator';
+import { AsyncStorage } from 'react-native';
 
 const Tab = createBottomTabNavigator();
 export class App extends Component {
@@ -85,7 +85,6 @@ export class App extends Component {
           {this.state.logged?(<Stack.Screen name="Main" component={Main} options={{headerShown:false}} />): null}
           {this.state.logged?(<Stack.Screen name="Home" component={Home} options={{headerShown:false}} />): null}
           {this.state.logged?(<Stack.Screen name="Profile" component={Profile} options={{headerShown:true}} />): null}
-          {this.state.logged?(<Stack.Screen name="DrawerNavigator" component={DrawerNavigator}/>):null}
           <Stack.Screen name="BMI" component={BMI} options={{headerShown:true}} />
           <Stack.Screen name="BMR" component={BMR} options={{headerShown:true}} />
           </Stack.Navigator>

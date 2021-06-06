@@ -34,7 +34,7 @@
     "nock": "^13.0.11",
     "react": "^16.13.1",
     "react-dom": "16.13.1",
-    "react-native": "https://github.com/expo/react-native/archive/sdk-40.0.1.tar.gz",
+    "react-native": "^0.63.2",
     "react-native-date-picker": "^3.3.1",
     "react-native-gesture-handler": "^1.10.3",
     "react-native-numeric-input": "^1.9.0",

@@ -1,7 +1,8 @@
 import React, { Component, } from 'react'
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Button, TouchableOpacity, ImageBackground, ScrollView, Image } from 'react-native';
+import { StyleSheet, Text, View, Button, TouchableOpacity, ScrollView, Image } from 'react-native';
 import generalStyle from '../../genStyles.js'
+
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import styles from '../../assets/styles'
@@ -17,6 +18,7 @@ export default function Home({navigation}) {
   };
     return (
       <ScrollView contentContainerStyle={[styles.backgroundRest]}>
+
       <Image source={require('../../assets/Logo.png')} style={{ height: 80, width: 400, alignSelf: 'center', justifyContent: 'space-evenly', marginTop: -80, marginBottom: 90 }} />
       <View style={{ width: '70%', alignSelf: 'center' }}>
       
@@ -39,9 +41,9 @@ export default function Home({navigation}) {
               color='green'
             ><Text>BMR</Text>
             </TouchableOpacity></View>
-            </View>
-            <Button style={{width: "200px",alignItems: ""}} onPress={signOut}></Button>
-            <Button style={{width: "200px",alignItems: ""}} onPress={() => navigation.navigate("Profile")}></Button>
+            <TouchableOpacity style={styles1.inRed} onPress={signOut}><Text style={{color: 'red'}}>Logout</Text></TouchableOpacity>   
+            <TouchableOpacity style={styles1.inRed} onPress={() => navigation.navigate("Profile")}><Text style={{color: 'green', borderColor: "white"}}>Profile</Text></TouchableOpacity>
+            </View>            
         </ScrollView>
     )
   }
@@ -69,6 +71,19 @@ const styles1 = StyleSheet.create({
     fontSize: 16,
     padding: 10,
     marginBottom: 45
+  },
+  inRed: {
+    flex: 0,
+        borderRadius: 360,
+        alignItems: "center",
+        fontFamily: "Open Sans",
+        fontSize: 16,
+        padding: 10,
+        width: 50,
+        height: 50,
+        marginBottom: 45,
+        flex: 1, flexDirection: 'column', alignSelf: 'center', paddingTop: 10,
+        fontFamily: 'Poppins'
   },
   inBlue: {
     flex: 0,
